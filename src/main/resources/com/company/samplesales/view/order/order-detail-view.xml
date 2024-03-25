@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://orderDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="orderDc"
+                  class="com.company.samplesales.entity.Order">
+            <fetchPlan extends="_base">
+                <property name="lines" fetchPlan="_instance_name">
+                    <property name="quantity"/>
+                    <property name="product" fetchPlan="_instance_name">
+                        <property name="price"/>
+                        <property name="special"/>
+                    </property>
+                </property>
+                <property name="customer" fetchPlan="_instance_name"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="linesDc" property="lines"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <settings auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="orderDc">
+            <textField id="orderNumberField" property="orderNumber"/>
+            <entityPicker id="customerField" property="customer">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="numberOfSpecialProductsField" property="numberOfSpecialProducts"/>
+            <textField id="amountField" property="amount"/>
+            <datePicker id="dateField" property="date"/>
+        </formLayout>
+        <h4 text="msg://com.company.samplesales.entity/Order.lines"/>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button action="linesDataGrid.create"/>
+            <button action="linesDataGrid.edit"/>
+            <button action="linesDataGrid.remove"/>
+        </hbox>
+        <dataGrid id="linesDataGrid" dataContainer="linesDc" width="100%" minHeight="20em">
+            <actions>
+                <action id="create" type="list_create">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="edit" type="list_edit">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="product.name"/>
+                <column property="product.price"/>
+                <column property="quantity"/>
+            </columns>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
