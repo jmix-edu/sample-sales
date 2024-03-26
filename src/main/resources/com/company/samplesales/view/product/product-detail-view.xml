@@ -18,10 +18,10 @@
     </actions>
     <layout>
         <formLayout id="form" dataContainer="productDc">
-            <textField id="photoField" property="photo"/>
-            <checkbox id="specialField" property="special"/>
-            <textField id="priceField" property="price"/>
             <textField id="nameField" property="name"/>
+            <textField id="priceField" property="price"/>
+            <checkbox id="specialField" property="special"/>
+            <fileStorageUploadField id="photoField" property="photo"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
