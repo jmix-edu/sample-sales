@@ -47,6 +47,8 @@ dependencies {
 
     implementation 'io.jmix.audit:jmix-audit-flowui-starter'
     implementation 'io.jmix.audit:jmix-audit-starter'
+
+    implementation 'io.jmix.ldap:jmix-ldap-starter'
 }
 
 test {
