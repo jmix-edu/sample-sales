@@ -16,7 +16,7 @@ public class OrderService {
     }
 
     public Double calculatePrice() {
-        return dataManager.loadValue("select sum(o.amount) from sales_Order o ", Double.class)
+        return dataManager.loadValue("select sum(o.amount) from Order_ o ", Double.class)
                 .one();
     }
 
