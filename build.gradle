@@ -43,10 +43,11 @@ dependencies {
     testImplementation 'io.jmix.flowui:jmix-flowui-test-assist'
 
     implementation 'io.jmix.rest:jmix-rest-starter'
-    implementation 'io.jmix.authserver:jmix-authserver-starter'
 
     implementation 'io.jmix.audit:jmix-audit-flowui-starter'
     implementation 'io.jmix.audit:jmix-audit-starter'
+
+    implementation 'io.jmix.oidc:jmix-oidc-starter'
 }
 
 test {
