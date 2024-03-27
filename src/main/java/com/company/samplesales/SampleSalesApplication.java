@@ -5,6 +5,7 @@ import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
+import io.jmix.core.security.AuthorizedUrlsProvider;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +19,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
+import java.util.Collection;
 
 @Push
 @Theme(value = "sample-sales")
@@ -52,5 +55,20 @@ public class SampleSalesApplication implements AppShellConfigurator {
                 + "http://localhost:"
                 + environment.getProperty("local.server.port")
                 + Strings.nullToEmpty(environment.getProperty("server.servlet.context-path")));
+    }
+
+    @Bean
+    public AuthorizedUrlsProvider myAuthorizedUrlsProvider() {
+        return new AuthorizedUrlsProvider() {
+            @Override
+            public Collection<String> getAuthenticatedUrlPatterns() {
+                return Arrays.asList("/authenticated/**");
+            }
+
+            @Override
+            public Collection<String> getAnonymousUrlPatterns() {
+                return Arrays.asList("/public/**");
+            }
+        };
     }
 }
